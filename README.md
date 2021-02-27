@@ -53,23 +53,11 @@ Os arquivos da projeto desenvolvido estão organizados da seguinte maneira:
 
     .
     ├── imgs
-    │   └── animacoes                    # 'Gifs' animados do funcionamento da aplicação
-    |       ├── consulta.gif
-    |       └── cadastro.gif
-    ├── imgs
+    │   ├── animacoes                    # 'Gifs' animados do funcionamento da aplicação
+    |   |   ├── consulta.gif
+    |   |   └── cadastro.gif
     │   └── screenshots                  # 'Screenshots' do funcionamento da aplicação
-    |       ├── menu-principal.png
-    |       ├── menu-cadastro.png
-    |       ├── menu-consulta.png
-    |       ├── cadastro-pessoa.png
-    |       ├── cadastro-sala-evento.png
-    |       ├── cadastro-espaco-cafe.png
-    |       ├── consulta-pessoa.png
-    |       ├── consulta-pessoa-selecionada.png
-    |       ├── consulta-sala-evento.png
-    |       ├── consulta-sala-evento-selecionada.png
-    |       ├── consulta-espaco-cafe.png
-    |       └── consulta-espaco-cafe-selecionado.png
+    |       └── *.png
     ├── static
     |   └── css           
     |        └── main.css                # Arquivo de estilo (.css) da aplicação web
