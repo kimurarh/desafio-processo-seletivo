@@ -19,13 +19,15 @@ Além disso, seguindo as instruções do problema proposto, as pessoas cadastrad
 ### Interface
 A interface inicial permite ao usuário navegar para duas outras interfaces: Cadastro e Consulta.
 
-<p align="center"><img src="imgs/screenshots/menu-principal" alt="Menu Principal" width="700"></p>
+<p align="center"><img src="imgs/screenshots/menu-principal.png" alt="Menu Principal" width="350px"></p>
 
 #### Cadastro
 Na interface de cadastro é possível realizar o cadastro de:
 * Pessoas, com nome e sobrenome;
 * Salas de Evento, com nome e lotação;
 * Espaços de Café, com nome e lotação.
+
+<p align="center"><img src="imgs/animacoes/cadastro.gif" alt="Animação de Cadastro" width="350px"></p>
 
 Observações: 
 1) Vale ressaltar que, conforme especificado no enunciado do problema, o número de Espaços de Café é limitado a 2.
@@ -35,6 +37,8 @@ Observações:
 Nesta interface o usuário pode consultar pessoas, salas e espaços de café previamente cadastrados.
 * Ao consultar uma Pessoa, serão disponibilizadas as salas em que a pessoa ficará em cada etapa e o espaço onde ela realizará cada intervalo de café;
 * Ao consultar uma Sala ou Espaço de Café, será disponibilizada uma lista contendo as pessoas que estarão naquela sala/espaço em cada etapa do evento.
+
+<p align="center"><img src="imgs/animacoes/consulta.gif" alt="Animação de Consulta" width="350px"></p>
 
 ## Tecnologias
 As seguintes tecnologias foram utilizadas para o desenvolvimento da aplicação:
