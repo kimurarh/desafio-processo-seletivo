@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from classes import Pessoa, SalaEvento, EspacoCafe, Locais
-from funcoes import atualiza_lotacao_real, calcula_lotacao_maxima
+from funcoes import atualiza_lotacao_real, calcula_lotacao_maxima, troca_de_sala, sala_nao_lotada, atualiza_database
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pessoas.db'
@@ -122,6 +122,92 @@ def cadastro_espaco_cafe():
     else:
         num_cafes = EspacoCafe.query.count()
         return render_template('cadastro-espaco-cafe.html', num_cafes=num_cafes)
+
+@app.route('/consulta', methods=['POST', 'GET'])
+def consulta():
+    if request.method == 'POST':
+        if 'consultar pessoa' in request.form:
+            return redirect('/consulta-pessoa')
+        elif 'consultar sala evento' in request.form:
+            return redirect('/consulta-sala-evento')
+        elif 'consultar espaco cafe' in request.form:
+            return redirect('/consulta-espaco-cafe')
+        elif 'voltar' in request.form:
+            return redirect('/')
+        else:
+            return 'Erro ao verificar requisição do usuário'
+    else:
+        atualiza_database(db)
+        return render_template('consulta.html')
+
+@app.route('/consulta-pessoa', methods=['POST', 'GET'])
+def consulta_pessoa():
+    if request.method == 'POST':
+        if 'consultar' in request.form:
+            id_pessoa = request.form['id_pessoa']
+            return redirect(url_for('consulta_pessoa_selecionada', id_pessoa=id_pessoa))
+        elif 'voltar' in request.form:
+            return redirect('/consulta')
+        else:
+            return 'Erro ao verificar requisição do usuário'
+    else:
+        pessoas = Pessoa.query.all()
+        return render_template('consulta-pessoa.html', pessoas=pessoas)
+
+@app.route('/consulta-pessoa-selecionada/<int:id_pessoa>', methods=['POST', 'GET'])
+def consulta_pessoa_selecionada(id_pessoa):
+    if request.method == 'POST':
+        return redirect('/consulta-pessoa')
+    else:
+        pessoa = Pessoa.query.get_or_404(id_pessoa)
+        locais = Locais(pessoa)
+        return render_template('consulta-pessoa-selecionada.html', pessoa=pessoa, locais=locais)
+
+@app.route('/consulta-sala-evento', methods=['POST', 'GET'])
+def consulta_sala_evento():
+    if request.method == 'POST':
+        if 'consultar' in request.form:
+            id_sala = request.form['id_sala_evento']
+            return redirect(url_for('consulta_sala_evento_selecionada', id_sala=id_sala))
+        elif 'voltar' in request.form:
+            return redirect('/consulta')
+        else:
+            return 'Erro ao verificar requisição do usuário'
+    else:
+        salas_evento = SalaEvento.query.all()
+        return render_template('consulta-sala-evento.html', salas_evento=salas_evento)
+
+@app.route('/consulta-sala-evento-selecionada/<int:id_sala>', methods=['POST', 'GET'])
+def consulta_sala_evento_selecionada(id_sala):
+    if request.method == 'POST':
+        return redirect('/consulta-sala-evento')
+    else:
+        sala = SalaEvento.query.get_or_404(id_sala)
+        pessoas_etapa_1 = Pessoa.query.filter_by(sala_evento_1 = id_sala).all()
+        pessoas_etapa_2 = Pessoa.query.filter_by(sala_evento_2 = id_sala).all()
+        return render_template('consulta-sala-evento-selecionada.html', sala=sala, pessoas_etapa_1=pessoas_etapa_1, pessoas_etapa_2=pessoas_etapa_2)
+
+@app.route('/consulta-espaco-cafe', methods=['POST', 'GET'])
+def consulta_espaco_cafe():
+    if request.method == 'POST':
+        if 'consultar' in request.form:
+            id_cafe = request.form['id_espaco_cafe']
+            return redirect(url_for('consulta_espaco_cafe_selecionado', id_cafe=id_cafe))
+        elif 'voltar' in request.form:
+            return redirect('/consulta')
+    else:
+        espacos_cafe = EspacoCafe.query.all()
+        return render_template('consulta-espaco-cafe.html', espacos_cafe=espacos_cafe)
+
+@app.route('/consulta-espaco-cafe-selecionado/<int:id_cafe>', methods=['POST', 'GET'])
+def consulta_espaco_cafe_selecionado(id_cafe):
+    if request.method == 'POST':
+        return redirect('/consulta-espaco-cafe')
+    else:
+        cafe = EspacoCafe.query.get_or_404(id_cafe)
+        pessoas_etapa_1 = Pessoa.query.filter_by(espaco_cafe_1 = id_cafe).all()
+        pessoas_etapa_2 = Pessoa.query.filter_by(espaco_cafe_2 = id_cafe).all()
+        return render_template('consulta-espaco-cafe-selecionado.html', cafe=cafe, pessoas_etapa_1=pessoas_etapa_1, pessoas_etapa_2=pessoas_etapa_2)
 
 if __name__ == "__main__":
     app.secret_key = 'secret key'
