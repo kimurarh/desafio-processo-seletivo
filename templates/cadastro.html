@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+    <p class="descricao">Selecione o tipo de cadastro</p>
+    <div class="conteudo">
+        <form action="/cadastro" method="POST">
+            <input type="submit" class="botao" name="cadastrar pessoa" value="Cadastrar Pessoa">
+            <input type="submit" class="botao" name="cadastrar sala evento" value="Cadastrar Sala de Evento">
+            <input type="submit" class="botao" name="cadastrar espaco cafe" value="Cadastrar Espaço de Café">
+            <input type="submit" class="botao" name="voltar" value="Voltar">
+        </form>
+    </div>
+{% endblock %}

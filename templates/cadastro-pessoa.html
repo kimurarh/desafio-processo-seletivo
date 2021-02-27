@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+<div class="conteudo">
+    {% if (num_salas == 0 or num_cafes == 0) %}
+        <div style="margin: 100px 0">
+            <p class="descricao">Não é possível cadastrar pessoas, porque:</p>
+            {% if num_salas == 0 %}
+            <p class="descricao">-Não há <span class="destaque">Salas de Evento</span> cadastradas-</p>
+            {% endif %}
+            {% if num_cafes == 0 %}
+            <p class="descricao">-Não há <span class="destaque">Espaços de Café</span> cadastrados-</p>
+            {% endif %}
+        </div>
+        <form action="/cadastro-pessoa" method="POST">
+            <input type="submit" class="botao" name="voltar" value="voltar">
+        </form>
+    {% elif total_pessoas >= lotacao_maxima %}
+        <div style="margin: 100px 0">
+            <p class="descricao">Não é possível cadastrar pessoas, porque:</p>
+            <p class="descricao">-<span class="destaque">Lotação máxima</span> atingida-</p>
+        </div>
+        <form action="/cadastro-pessoa" method="POST">
+            <input type="submit" class="botao" name="voltar" value="voltar">
+        </form>
+    {% else %}
+        <p class="descricao">Digite as informações da pessoa:</p>
+        <form action="/cadastro-pessoa" method="POST">
+            <input type="text" name="nome" id="nome" value="" placeholder="Nome">
+            <input type="text" name="sobrenome" id="sobrenome" value="" placeholder="Sobrenome">
+            <div class="opcoes-click">
+                <input type="submit" class="botao" name="voltar" value="voltar">
+                <input type="submit" class="botao" name="cadastrar" value="cadastrar">
+            </div>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alerta-{{category}}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+
+</div>
+{% endblock %}

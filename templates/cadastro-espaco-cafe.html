@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+<div class="conteudo">
+    {% if num_cafes >= 2 %}
+        <div style="margin: 100px 0">
+            <p class="descricao"> Número máximo de espaços de café cadastrados (2)</p>
+        </div>
+        <form action="/cadastro-espaco-cafe" method="POST">
+            <div class="opcoes-click">
+                <input type="submit" class="botao" name="voltar" value="voltar">
+            </div>
+        </form>
+    {% else %}
+        <p class="descricao">Digite as informações do Espaço de Café:</p>
+        <form action="/cadastro-espaco-cafe" method="POST">
+            <input type="text" name="nome" id="nome" value="" placeholder="Nome">
+            <input type="number" onkeypress="return event.charCode >= 48" min="1" name="lotacao" id="lotacao" value="" placeholder="Lotacao">
+            <div class="opcoes-click">
+                <input type="submit" class="botao" name="voltar" value="voltar">
+                <input type="submit" class="botao" name="cadastrar" value="cadastrar">
+            </div>
+        </form>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alerta-{{category}}">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+</div>
+{% endblock %}
