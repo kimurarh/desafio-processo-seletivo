@@ -53,11 +53,11 @@ Os arquivos da projeto desenvolvido estão organizados da seguinte maneira:
 
     .
     ├── imgs
-    │   └── animacoes                 # 'Gifs' animados do funcionamento da aplicação
+    │   └── animacoes                    # 'Gifs' animados do funcionamento da aplicação
     |       ├── consulta.gif
     |       └── cadastro.gif
     ├── imgs
-    │   └── screenshots                 # 'Screenshots' do funcionamento da aplicação
+    │   └── screenshots                  # 'Screenshots' do funcionamento da aplicação
     |       ├── menu-principal.png
     |       ├── menu-cadastro.png
     |       ├── menu-consulta.png
