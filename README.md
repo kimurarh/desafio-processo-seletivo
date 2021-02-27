@@ -5,7 +5,7 @@ Será realizado um treinamento para uma grande empresa de TI especializada em so
 
 ## Projeto
 ### Sistema desenvolvido
-O sistema desenvolvimento consiste em uma aplicação de gerenciamento de eventos, que permite:
+O sistema desenvolvido consiste em uma aplicação de gerenciamento de eventos, que permite:
 * O cadastro de pessoas, com nome e sobrenome;
 * O cadastro de salas de evento, com nome e lotação;
 * O cadastro de espaços de café, com nome e lotação;
