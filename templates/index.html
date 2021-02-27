@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+    <p class="descricao">Menu Principal</p>
+    <div class="conteudo">
+        <form action="/" method="POST">
+            <input type="submit" class="botao" name="cadastrar" value="Cadastrar">
+            <input type="submit" class="botao" name="consultar" value="Consultar">
+        </form>
+    </div>
+{% endblock %}
