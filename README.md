@@ -78,6 +78,7 @@ Os arquivos da projeto desenvolvido estão organizados da seguinte maneira:
     ├── app.py                          # Aplicação principal
     ├── classes.py                      # Classes e Modelos do Banco de dados
     ├── funcoes.py                      # Principais funções da aplicação
+    ├── limpa-banco-de-dados.py         # 'Script' que limpa todos os bancos de dados
     ├── espacoscafe.db                  # Banco de dados contendo todos os Espaços de Café cadastrados
     ├── pessoas.db                      # Banco de dados contendo todas as Pessoas cadastradas
     ├── salasevento.db                  # Banco de dados contendo todas as Salas de Evento cadastradas
@@ -85,3 +86,20 @@ Os arquivos da projeto desenvolvido estão organizados da seguinte maneira:
 
 ## Execução
 Para executar a aplicação:
+* No terminal, crie o ambiente conda com as dependências necessárias:
+```
+conda env create -f environment.yml
+```
+* Execute a aplicação:
+```
+python app.py
+```
+* Acesse no seu navegador de preferência:
+```
+localhost:5000
+```
+
+Obs.: Este repositório contém bancos de dados previamente criados e preenchidos. Caso deseje "limpar" os bancos de dados execute o seguinte comando:
+```
+python limpa-banco-de-dados.py
+```
