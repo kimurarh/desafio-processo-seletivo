@@ -1,0 +1,150 @@
+:root {
+    --dark-grey: #292929;
+    --md-grey: #393939;
+    --light-grey: #494949;
+    --hover-bg: #27cd7d;
+    --hover-color: black;
+    --bg-color: #1d1d1d;
+    --destaque: #FF4136;
+}
+
+body, html {
+    background-color: var(--bg-color);
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container h1 {
+    color: white;
+    width: 500px;
+    padding: 10px;
+    font-size: 32px;
+    border-bottom: 2px solid var(--md-grey);
+    text-align: center;
+    margin: 0;
+}
+
+.container p {
+    text-align: center;
+}
+
+.container p.descricao {
+    color: white;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.container .conteudo {
+    margin: 0;
+}
+
+.container .conteudo p.titulo-lista {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container .conteudo .lista {
+    margin: 30px 0;
+}
+
+.container .conteudo p.lista-1 {
+    color: #0074D9;
+}
+
+.container .conteudo p.lista-2 {
+    color: #2ECC40 ;
+}
+
+.container .conteudo p.lista {
+    border-top: 1px solid var(--md-grey);
+    margin: 4px;
+    font-size: 18px;
+}
+
+.container .conteudo p.lista:hover {
+    background-color: var(--dark-grey);
+    font-weight: bold;
+}
+
+.container .conteudo form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4px;
+}
+
+.container .conteudo form input {
+    margin: 8px 4px;
+    background-color: var(--light-grey);
+    border: 1px solid var(--md-grey);
+    border-radius: 6px;
+    color: white;
+    height: 36px;
+    font-size: 18px;
+    padding-left: 10px;
+    width: 250px;
+}
+
+.container .conteudo form input.botao {
+    background-color: var(--md-grey);
+    width: 250px;
+}
+
+.container .conteudo form input.botao:hover {
+    background-color: var(--hover-bg);
+    color: var(--hover-color);
+    font-weight: bold;
+}
+
+.container .conteudo select {
+    margin-bottom: 20px;
+    width: 250px;
+}
+
+.container .conteudo table {
+    border-radius: 6px;
+}
+
+.container .conteudo th, td {
+    padding: 10px;
+    text-align: right;
+    border-top: 1px solid var(--md-grey);
+}
+
+.container .conteudo td {
+    text-shadow: 0px 0px 1px var(--light-grey);
+}
+
+.container .conteudo td.evento {
+    color: #0074D9;
+    font-weight: bold;
+}
+
+.container .conteudo td.intervalo {
+    color: #2ECC40 ;
+    font-weight: bold;
+}
+
+.alerta-erro {
+    color: red;
+    text-align: center;
+}
+
+.alerta-sucesso {
+    color: green;
+    text-align: center;
+}
+
+span.destaque {
+    font-weight: bold;
+    color: var(--destaque);
+}
