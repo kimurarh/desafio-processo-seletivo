@@ -19,6 +19,8 @@ Além disso, seguindo as instruções do problema proposto, as pessoas cadastrad
 ### Interface
 A interface inicial permite ao usuário navegar para duas outras interfaces: Cadastro e Consulta.
 
+<p align="center"><img src="imgs/screenshots/menu-principal" alt="Menu Principal" width="700"></p>
+
 #### Cadastro
 Na interface de cadastro é possível realizar o cadastro de:
 * Pessoas, com nome e sobrenome;
