@@ -94,12 +94,13 @@ conda env create -f environment.yml
 ```
 python app.py
 ```
-* Acesse no seu navegador de preferência:
+* No seu navegador de preferência, acesse:
 ```
 localhost:5000
 ```
 
-Obs.: Este repositório contém bancos de dados previamente criados e preenchidos. Caso deseje "limpar" os bancos de dados execute o seguinte comando:
+
+<b>Obs</b>.: Este repositório contém bancos de dados previamente criados e preenchidos. Caso deseje "limpar" os bancos de dados execute o seguinte comando:
 ```
 python limpa-banco-de-dados.py
 ```
