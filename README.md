@@ -90,6 +90,10 @@ Para executar a aplicação:
 ```
 conda env create -f environment.yml
 ```
+* Ative o ambiente conda:
+```
+conda activate desafio-go-dev
+```
 * Execute a aplicação:
 ```
 python app.py
