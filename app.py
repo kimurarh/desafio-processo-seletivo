@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from classes import Pessoa, SalaEvento, EspacoCafe, Locais
+from funcoes import atualiza_lotacao_real, calcula_lotacao_maxima
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pessoas.db'
@@ -43,20 +44,29 @@ def cadastro_pessoa():
             pessoa_nome = request.form['nome']
             pessoa_sobrenome = request.form['sobrenome']
             nova_pessoa = Pessoa(nome=pessoa_nome, sobrenome=pessoa_sobrenome)
-            try:
-                db.session.add(nova_pessoa)
-                db.session.commit()
-                flash('{} {} cadastrado(a) com sucesso'.format(nova_pessoa.nome, nova_pessoa.sobrenome), 'sucesso')
+            if pessoa_nome == '' or pessoa_sobrenome == '':
+                flash('Por favor, preencha todos os campos', 'erro')
                 return redirect('/cadastro-pessoa')
-            except:
-                db.session.rollback()
-                return 'Houve um problema ao cadastrar a pessoa'
+            else:
+                try:
+                    db.session.add(nova_pessoa)
+                    db.session.commit()
+                    flash('{} {} cadastrado(a) com sucesso'.format(nova_pessoa.nome, nova_pessoa.sobrenome), 'sucesso')
+                    return redirect('/cadastro-pessoa')
+                except:
+                    db.session.rollback()
+                    return 'Houve um problema ao cadastrar a pessoa'
         elif 'voltar' in request.form:
             return redirect('/cadastro')
         else:
             return 'Erro ao verificar requisição do usuário'
     else:
-        return render_template('cadastro-pessoa.html')
+        total_pessoas = db.session.query(Pessoa).count()
+        salas = db.session.query(SalaEvento).all()
+        cafes = db.session.query(EspacoCafe).all()
+        lotacao_maxima = calcula_lotacao_maxima(salas, cafes)
+        print(lotacao_maxima)
+        return render_template('cadastro-pessoa.html', num_salas=len(salas), num_cafes=len(cafes), lotacao_maxima=lotacao_maxima, total_pessoas=total_pessoas)
 
 @app.route('/cadastro-sala-evento', methods=['POST', 'GET'])
 def cadastro_sala_evento():
@@ -65,20 +75,26 @@ def cadastro_sala_evento():
             sala_nome = request.form['nome']
             sala_lotacao = request.form['lotacao']
             nova_sala_evento = SalaEvento(nome=sala_nome, lotacao=sala_lotacao)
-            try:
-                db.session.add(nova_sala_evento)
-                db.session.commit()
-                flash('{} cadastrada com sucesso'.format(nova_sala_evento.nome), 'sucesso')
+            if sala_nome == '' or sala_lotacao == '':
+                flash('Por favor, preencha todos os campos', 'erro')
                 return redirect('/cadastro-sala-evento')
-            except:
-                db.session.rollback()
-                return 'Houve um problema ao cadastrar a sala de evento'
+            else:
+                try:
+                    db.session.add(nova_sala_evento)
+                    db.session.commit()
+                    flash('{} cadastrada com sucesso'.format(nova_sala_evento.nome), 'sucesso')
+                    return redirect('/cadastro-sala-evento')
+                except:
+                    db.session.rollback()
+                    return 'Houve um problema ao cadastrar a sala de evento'
         elif 'voltar' in request.form:
             return redirect('/cadastro')
         else:
             return 'Erro ao verificar requisição do usuário'
     else:
-        return render_template('cadastro-sala-evento.html')
+        salas = db.session.query(SalaEvento).all()
+        atualiza_lotacao_real(db, salas)
+        return render_template('cadastro-sala-evento.html', salas=salas)
 
 @app.route('/cadastro-espaco-cafe', methods=['POST', 'GET'])
 def cadastro_espaco_cafe():
@@ -87,20 +103,25 @@ def cadastro_espaco_cafe():
             cafe_nome = request.form['nome']
             cafe_lotacao = request.form['lotacao']
             novo_cafe = EspacoCafe(nome=cafe_nome, lotacao=cafe_lotacao)
-            try:
-                db.session.add(novo_cafe)
-                db.session.commit()
-                flash('{} cadastrado com sucesso'.format(novo_cafe.nome), 'sucesso')
+            if cafe_nome == '' or cafe_lotacao == '':
+                flash('Por favor, preencha todos os campos', 'erro')
                 return redirect('/cadastro-espaco-cafe')
-            except:
-                db.session.rollback()
-                return 'Houve um problema ao cadastrar o espaco de cafe'
+            else:
+                try:
+                    db.session.add(novo_cafe)
+                    db.session.commit()
+                    flash('{} cadastrado com sucesso'.format(novo_cafe.nome), 'sucesso')
+                    return redirect('/cadastro-espaco-cafe')
+                except:
+                    db.session.rollback()
+                    return 'Houve um problema ao cadastrar o espaco de cafe'
         elif 'voltar' in request.form:
             return redirect('/cadastro')
         else:
             return 'Erro ao verificar requisição do usuário'
     else:
-        return render_template('cadastro-espaco-cafe.html')
+        num_cafes = EspacoCafe.query.count()
+        return render_template('cadastro-espaco-cafe.html', num_cafes=num_cafes)
 
 if __name__ == "__main__":
     app.secret_key = 'secret key'
