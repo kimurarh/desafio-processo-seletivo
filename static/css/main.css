@@ -21,6 +21,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
 
 .container h1 {
@@ -41,6 +42,36 @@ body, html {
     color: white;
     font-size: 22px;
     font-weight: normal;
+}
+
+.container form input.botao {
+    background-color: var(--md-grey);
+    width: 250px;
+}
+
+.container form input.botao:hover {
+    background-color: var(--hover-bg);
+    color: var(--hover-color);
+    font-weight: bold;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4px;
+}
+
+.container form input {
+    margin: 8px 4px;
+    background-color: var(--light-grey);
+    border: 1px solid var(--md-grey);
+    border-radius: 6px;
+    color: white;
+    height: 36px;
+    font-size: 18px;
+    padding-left: 10px;
+    width: 250px;
 }
 
 .container .conteudo {
@@ -72,36 +103,6 @@ body, html {
 
 .container .conteudo p.lista:hover {
     background-color: var(--dark-grey);
-    font-weight: bold;
-}
-
-.container .conteudo form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 4px;
-}
-
-.container .conteudo form input {
-    margin: 8px 4px;
-    background-color: var(--light-grey);
-    border: 1px solid var(--md-grey);
-    border-radius: 6px;
-    color: white;
-    height: 36px;
-    font-size: 18px;
-    padding-left: 10px;
-    width: 250px;
-}
-
-.container .conteudo form input.botao {
-    background-color: var(--md-grey);
-    width: 250px;
-}
-
-.container .conteudo form input.botao:hover {
-    background-color: var(--hover-bg);
-    color: var(--hover-color);
     font-weight: bold;
 }
 
