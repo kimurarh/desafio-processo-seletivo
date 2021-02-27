@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+<div class="conteudo">
+    <p class="descricao"><b>{{ pessoa.nome }} {{ pessoa.sobrenome }}</b></p>
+
+    <table>
+        <tr>
+            <th>Sala de Evento 1</th>
+            <td class="evento">{{ locais.evento_1 }}</td>
+        </tr>
+        <tr>
+            <th>Intervalo 1</th>
+            <td class="intervalo">{{ locais.cafe_1 }}</td>
+        </tr>
+        <tr>
+            <th>Sala de Evento 2</th>
+            <td class="evento">{{ locais.evento_2 }}</td>
+        </tr>
+        <tr>
+            <th>Intervalo 2</th>
+            <td class="intervalo">{{ locais.cafe_2 }}</td>
+        </tr>
+    </table>
+
+    <form action="/consulta-pessoa-selecionada/{{pessoa.id}}" method="POST">
+        <input type="submit" class="botao" name="voltar" value="Voltar">
+    </form>
+</div>
+{% endblock %}

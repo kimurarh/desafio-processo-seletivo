@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+<div class="conteudo">
+    <p class="descricao"><b>{{sala.nome}} - Distribuição de pessoas</b></p> 
+    <div class="lista">
+        <p class="titulo-lista lista-1">Pessoas na 1 Etapa</p>
+        {% for pessoa in pessoas_etapa_1 %}
+            <p class="lista">{{ pessoa.nome }} {{ pessoa.sobrenome }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="lista">
+        <p class="titulo-lista lista-2">Pessoas na 2 Etapa</p>
+        {% for pessoa in pessoas_etapa_2 %}
+            <p class="lista">{{ pessoa.nome }} {{ pessoa.sobrenome }}</p>
+        {%endfor %}
+    </div>
+    <form action="/consulta-sala-evento-selecionada/{{sala.id}}" method="POST">
+        <input type="submit" class="botao" name="voltar" value="Voltar">
+    </form>
+</div>
+{% endblock %}

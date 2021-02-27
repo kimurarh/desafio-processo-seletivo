@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+    {% if espacos_cafe|length < 1 %}
+        <div style="margin: 100px 0">
+            <p class="descricao">Não há espaços de café cadastrados.</p>
+        </div>
+        <form action="/consulta-espaco-cafe" method="POST">
+            <input type="submit" class="botao" name="voltar" value="Voltar">
+        </form>
+    {% else %}
+        <p class="descricao">Selecione o nome do espaco de café:</p>
+        <div class="conteudo">
+            <form action="/consulta-espaco-cafe" method="POST">
+                <select name="id_espaco_cafe">
+                    {% for cafe in espacos_cafe %}
+                        <option value="{{ cafe.id }}">{{ cafe.nome }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" class="botao" name="consultar" value="Consultar">
+                <input type="submit" class="botao" name="voltar" value="Voltar">
+            </form>
+        </div>
+    {% endif %}
+
+{% endblock %}

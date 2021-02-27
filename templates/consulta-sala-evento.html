@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+    {% if salas_evento|length < 1 %}
+        <div style="margin: 100px 0">
+            <p class="descricao">Não há salas de evento cadastradas.</p>
+        </div>
+        <form action="/consulta-sala-evento" method="POST">
+            <input type="submit" class="botao" name="voltar" value="Voltar">
+        </form>
+    {% else %}
+        <p class="descricao">Selecione o nome da sala de evento:</p>
+        <div class="conteudo">
+            <form action="/consulta-sala-evento" method="POST">
+                <select name="id_sala_evento">
+                    {% for sala in salas_evento %}
+                    <option value="{{ sala.id }}">{{ sala.nome }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" class="botao" name="consultar" value="Consultar">
+                <input type="submit" class="botao" name="voltar" value="Voltar">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

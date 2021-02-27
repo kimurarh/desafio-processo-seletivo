@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Gerenciador de Evento</title>
+{% endblock %}
+
+{% block body %}
+    {% if pessoas|length < 1 %}
+        <div style="margin: 100px 0">
+            <p class="descricao">Ainda não há pessoas cadastradas</p>
+        </div>
+        <form action="/consulta-pessoa" method="POST">
+            <input type="submit" class="botao" name="voltar" value="Voltar">
+        </form>
+    {% else %}
+        <p class="descricao">Selecione o nome da pessoa:</p>
+        <div class="conteudo">
+            <form action="/consulta-pessoa" method="POST">
+                <select name="id_pessoa">
+                    {% for pessoa in pessoas %}
+                        <option value="{{ pessoa.id }}">{{ pessoa.nome + " " + pessoa.sobrenome }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" class="botao" name="consultar" value="Consultar">
+                <input type="submit" class="botao" name="voltar" value="Voltar">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
